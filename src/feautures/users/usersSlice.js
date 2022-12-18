@@ -6,14 +6,14 @@ const initialState = [
 ];
 
 const usersSlice = createSlice({
-    name: 'posts',
+    name: 'users',
     initialState,
     reducers: {
 
     }
 });
 
-export const selectAllUsers = (state) => state.posts;
+export const selectAllUsers = (store) => store.users;
 
 
 export default usersSlice.reducer;
