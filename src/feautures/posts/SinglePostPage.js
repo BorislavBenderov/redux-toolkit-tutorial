@@ -1,9 +1,14 @@
 import { useSelector } from "react-redux";
-import { selectPostById } from "../feautures/posts/postsSlice";
+import { useParams } from "react-router-dom";
+import { selectAllPosts, selectPostById } from "../posts/postsSlice";
 import { ReactionButtons } from './ReactionButtons';
+import { PostAuthor } from "./PostAuthor";
+import { TimeAgo } from "./TimeAgo";
 
 export const SinglePostPage = () => {
-    const post = useSelector((state) => selectPostById(state, postId));
+    const { postId } = useParams();
+    const posts = useSelector(selectAllPosts);
+    const post = posts.find(post => post.id === Number(postId));
 
     if (!post) {
         return (

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectAllPosts, getPostsStatus, getPostsError, fetchPosts } from "../feautures/posts/postsSlice";
+import { selectAllPosts, getPostsStatus, getPostsError, fetchPosts } from "../posts/postsSlice";
 import { PostsExcerpt } from "./PostsExcerpt";
 
 
