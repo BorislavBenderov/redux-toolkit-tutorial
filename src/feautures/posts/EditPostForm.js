@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom"
 import { selectAllUsers } from "../users/usersSlice";
-import { selectAllPosts, updatePost } from "./postsSlice";
+import { deletePost, selectAllPosts, updatePost } from "./postsSlice";
 
 export const EditPostForm = () => {
     const { postId } = useParams();
@@ -59,6 +59,21 @@ export const EditPostForm = () => {
         }
     }
 
+    const onDelete = () => {
+        try {
+            setRequestStatus('pending');
+            dispatch(deletePost({ id: post.id })).unwrap();
+            setTitle('');
+            setContent('');
+            setUserId('');
+            navigate('/');
+        } catch (error) {
+            console.error('Failder to delete the post', error);
+        } finally {
+            setRequestStatus('idle');
+        }
+    }
+
     return (
         <section>
             <h2>Add Post</h2>
@@ -91,6 +106,9 @@ export const EditPostForm = () => {
                     type="button"
                     onClick={onSave}
                     disabled={!canSave}>Save Post</button>
+                <button
+                    type="button"
+                    onClick={onDelete}>Delete Post</button>
             </form>
         </section>
     );
